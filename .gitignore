@@ -8,3 +8,11 @@ obj/
 
 # Excel's lock file for an open workbook
 ~$*
+
+# Fotos anexadas pelo sistema (ficam só na máquina)
+dist/arquivos/*.png
+dist/arquivos/*.jpg
+dist/arquivos/*.jpeg
+dist/arquivos/*.gif
+dist/arquivos/*.webp
+dist/arquivos/*.bmp
