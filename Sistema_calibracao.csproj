@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    A convenience for anyone who has Visual Studio, and nothing more.
+
+    Ribdim does NOT build through this file. It rescans src/**/*.cs from disk on
+    every build and drives the compiler itself, so adding a .cs file needs no
+    edit here. If the two ever disagree, disk wins.
+
+    Keeping it around is still worth it: it makes the folder a project that
+    Visual Studio, Rider and OmniSharp all understand, which is what gives an
+    assistant working in this folder type information about the Excel API.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>Sistema_calibracao</AssemblyName>
+    <RootNamespace>Sistema_calibracao</RootNamespace>
+
+    <!-- Excel-DNA builds both bitnesses; the VBA picks one at runtime. -->
+    <ExcelAddInFileName>Sistema_calibracao</ExcelAddInFileName>
+    <ExcelDnaCreate32BitAddIn>true</ExcelDnaCreate32BitAddIn>
+    <ExcelDnaCreate64BitAddIn>true</ExcelDnaCreate64BitAddIn>
+
+    <!-- The WebView2 package brings the WPF assembly along; only WinForms is used. -->
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExcelDna.AddIn" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="16.0.18925.20022" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4129.50" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <!--
+    Embeds the interop types into the assembly itself, so that
+    Microsoft.Office.Interop.Excel.dll (1.7 MB) need not travel inside the .xll.
+
+    This has to be here, on the already-resolved reference. <EmbedInteropTypes>
+    as PackageReference metadata is accepted without complaint and has no
+    effect — the assembly keeps being looked up at runtime, and inside Excel it
+    does not exist. The symptom is not an error: it is a FileNotFoundException
+    swallowed by the ribbon callback, which vanishes without trace, and the tab
+    simply never appears.
+  -->
+  <Target Name="EmbedExcelInterop" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <ReferencePath Condition="'%(FileName)' == 'Microsoft.Office.Interop.Excel'">
+        <EmbedInteropTypes>true</EmbedInteropTypes>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <!-- Required for "dynamic": the payload is read through COM late binding. -->
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      The window's icon. LogicalName is spelled out because Panel.cs asks for it
+      by that exact string, and the name MSBuild would derive from the path is
+      not something you would guess from the other side.
+    -->
+    <EmbeddedResource Include="resources\app.ico" LogicalName="Sistema_calibracao.app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- web/ and the workbook are payload, not compiler input. -->
+    <None Remove="web\**" />
+    <None Remove="dist\**" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "appName": "MetroCal",
+  "title": "MetroCal — Gestão e Controle de Calibração",
+  "ribbonTab": "MetroCal",
+  "ribbonGroup": "MetroCal",
+  "ribbonButton": "Abrir painel",
+  "entryHtml": "index.html",
+  "workbookFile": "Sistema_calibracao.xlsx",
+  "panelHost": "form",
+  "pane": {},
+  "window": {
+    "width": 1200,
+    "height": 780,
+    "startPosition": "CenterScreen"
+  }
+}

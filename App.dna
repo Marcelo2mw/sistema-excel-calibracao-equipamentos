@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Excel-DNA manifest.
+
+  It exists to declare the dependencies with Pack="true". Without it the
+  auto-generated .dna lists only the add-in's own assembly, and the packed .xll
+  ships without Newtonsoft or the WebView2 wrappers — loading only on the machine
+  that compiled it, where those DLLs happen to sit beside it.
+
+  With everything packed the .xll is a single file, which is what the VBA inside
+  the workbook needs: it extracts exactly one file before calling RegisterXLL.
+-->
+<DnaLibrary Name="Sistema_calibracao" RuntimeVersion="v4.0"
+            xmlns="http://schemas.excel-dna.net/addin/2020/07/dnalibrary">
+
+  <ExternalLibrary Path="Sistema_calibracao.dll" ExplicitExports="false" LoadFromBytes="true" Pack="true" />
+
+  <Reference Path="Newtonsoft.Json.dll" Pack="true" />
+  <Reference Path="Microsoft.Web.WebView2.Core.dll" Pack="true" />
+  <Reference Path="Microsoft.Web.WebView2.WinForms.dll" Pack="true" />
+
+</DnaLibrary>

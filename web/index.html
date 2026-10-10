@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MetroCal — Gestão e Controle de Calibração</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <span class="sb-logo" id="sbLogo"></span>
+      <div>
+        <b>MetroCal</b>
+        <span>Gestão de calibração</span>
+      </div>
+    </div>
+
+    <nav class="sb-nav" id="nav"></nav>
+
+    <div class="sb-user" id="sbUser" title="Trocar usuário (Configurações)">
+      <span class="avatar" id="sbAvatar">—</span>
+      <div>
+        <b id="sbUserName">—</b>
+        <span id="sbUserRole">—</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="crumb" id="crumb">Visão geral</div>
+        <h1 id="title">Dashboard</h1>
+      </div>
+      <div class="grow"></div>
+
+      <label class="search">
+        <span id="searchIcon"></span>
+        <input id="globalSearch" type="text" placeholder="Buscar instrumento, certificado…" autocomplete="off">
+      </label>
+
+      <button class="iconbtn" id="btnAlerts" title="Alertas">
+        <span id="bellIcon"></span>
+        <span class="dot hidden" id="bellDot"></span>
+      </button>
+
+      <span class="labtag">Lab. Metrologia</span>
+      <span class="avatar" id="topAvatar">—</span>
+    </header>
+
+    <div id="view"></div>
+  </div>
+
+</div>
+
+<div id="toasts"></div>
+
+<script src="bridge.js"></script>
+<script src="ui.js"></script>
+<script src="data.js"></script>
+<script src="seed-data.js"></script>
+<script src="seed.js"></script>
+<script src="screens.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

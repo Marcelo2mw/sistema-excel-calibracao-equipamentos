@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+  <ribbon>
+    <tabs>
+      <tab id="TabMetroCal" label="MetroCal" insertBeforeMso="TabHome">
+        <group id="GroupMetroCalMain" label="MetroCal">
+          <button id="btnOpenMetroCal" label="Abrir painel" size="large"
+                  imageMso="NavigationPaneExcelFeature"
+                  screentip="MetroCal — Gestão e Controle de Calibração"
+                  onAction="OnClick" />
+          <button id="btnMetroDash" label="Dashboard" size="large"
+                  imageMso="ChartInsert"
+                  onAction="OnRibbonAction" tag="dashboard" />
+          <button id="btnMetroInst" label="Instrumentos" size="large"
+                  imageMso="TableInsertExcel"
+                  onAction="OnRibbonAction" tag="instrumentos" />
+        </group>
+        <group id="GroupMetroCalOps" label="Operações">
+          <button id="btnMetroPad" label="Padrões"
+                  imageMso="FunctionWizard"
+                  onAction="OnRibbonAction" tag="padroes" />
+          <button id="btnMetroCals" label="Calibrações"
+                  imageMso="NameManager"
+                  onAction="OnRibbonAction" tag="calibracoes" />
+          <button id="btnMetroMatriz" label="Matriz"
+                  imageMso="DataValidation"
+                  onAction="OnRibbonAction" tag="matriz" />
+          <button id="btnMetroAgenda" label="Agenda"
+                  imageMso="WatchWindow"
+                  onAction="OnRibbonAction" tag="agenda" />
+          <button id="btnMetroRel" label="Relatórios"
+                  imageMso="PrintPreviewAndPrint"
+                  onAction="OnRibbonAction" tag="relatorios" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
